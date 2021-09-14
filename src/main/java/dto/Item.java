@@ -9,6 +9,7 @@ package dto;
  *
  * @author conno
  */
-public class dummy {
+public class Item {
+    private String name;
     
 }
