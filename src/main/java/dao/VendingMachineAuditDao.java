@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto;
+package dao;
 
 /**
  *
  * @author conno
  */
-public class dummy {
+public interface VendingMachineAuditDao {
+    
+    public void writeAuditEntry(String entry) throws VendingMachinePersistenceException;
     
 }

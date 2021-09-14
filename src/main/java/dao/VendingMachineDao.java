@@ -5,10 +5,18 @@
  */
 package dao;
 
+import java.util.List;
+
 /**
  *
  * @author conno
  */
-public class VendingMachineDao {
+public interface VendingMachineDao {
     
+    List<Item> getAllItems() throws VendingMachinePersistenceException;
+    
+    Item getItem(String name) throws VendingMachinePersistenceException;
+    
+    void decreaseStock(Item item) throws VendingMachinePersistenceException;
+
 }
