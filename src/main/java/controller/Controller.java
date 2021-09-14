@@ -26,7 +26,6 @@ public class VendingMachineController {
     public void run()  {
         boolean keepGoing = true;
         int menuSelection = -1;
-        int
         try {
             while (keepGoing) {
                 // 1 = enter money, 2 = exit
