@@ -11,15 +11,15 @@ import java.util.Objects;
  *
  * @author conno
  */
-public class Item extends Inventory{
+public class Item implements Inventory{
     private String name;
     private double price;
-    private Inventory itemInventory;
+    private int stock;
     
-    public Item(String name, double price, dto.Inventory itemInventory) {
+    public Item(String name, double price, int stock) {
         this.name = name;
         this.price = price;
-        this.itemInventory = itemInventory;
+        this.stock = stock;
     }
 
     public String getName() {
@@ -30,12 +30,12 @@ public class Item extends Inventory{
         return price;
     }
 
-    public dto.Inventory getItemInventory() {
-        return itemInventory;
+    public int getStock() {
+        return stock;
     }
 
-    public void setItemInventory(dto.Inventory itemInventory) {
-        this.itemInventory = itemInventory;
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class Item extends Inventory{
         int hash = 3;
         hash = 53 * hash + Objects.hashCode(this.name);
         hash = 53 * hash + (int) (Double.doubleToLongBits(this.price) ^ (Double.doubleToLongBits(this.price) >>> 32));
-        hash = 53 * hash + Objects.hashCode(this.itemInventory);
+        hash = 53 * hash + Objects.hashCode(this.stock);
         return hash;
     }
 
@@ -65,7 +65,7 @@ public class Item extends Inventory{
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
-        if (!Objects.equals(this.itemInventory, other.itemInventory)) {
+        if (!Objects.equals(this.stock, other.stock)) {
             return false;
         }
         return true;
