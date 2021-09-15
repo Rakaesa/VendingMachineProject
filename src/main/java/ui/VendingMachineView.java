@@ -21,11 +21,11 @@ public class VendingMachineView {
 
     public int displayItemsGetSelection() {
         io.print("Vending Machine:");
-        io.print("1. Snickers");
-        io.print("2. Kit Kat");
-        io.print("3. Mountain Dew");
-        io.print("4. Doritos");
-        io.print("5. Coca Cola");
+        io.print("1. Snickers, $2.00");
+        io.print("2. Kit Kat, $2.00");
+        io.print("3. Mountain Dew, $2.00");
+        io.print("4. Doritos, $1.50");
+        io.print("5. Coca Cola, $2.00");
 
         return io.readInt("Please select: 1 = Enter Money. 2. Exit", 1, 2);
     }
