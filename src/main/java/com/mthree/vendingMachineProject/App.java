@@ -5,8 +5,16 @@
  */
 package com.mthree.vendingMachineProject;
 
+import controller.VendingMachineController;
+import dao.VendingMachineAuditDao;
+import dao.VendingMachineAuditDaoImpl;
+import dao.VendingMachineDao;
+import dao.VendingMachineDaoImpl;
+import service.VendingMachineServiceLayer;
+import service.VendingMachineServiceLayerImpl;
 import ui.UserIO;
 import ui.UserIOConsoleFileImpl;
+import ui.VendingMachineView;
 
 /**
  *
@@ -20,9 +28,9 @@ public class App {
         // Instantiate the View and wire the UserIO implementation into it
         VendingMachineView myView = new VendingMachineView(myIo);
         // Instantiate the DAO
-        VendingMachineDao myDao = new VendingMachineDaoFileImpl();
+        VendingMachineDao myDao = new VendingMachineDaoImpl();
         // Instantiate the Audit DAO
-        VendingMachineAuditDao myAuditDao = new VendingMachineAuditDaoFileImpl();
+        VendingMachineAuditDao myAuditDao = new VendingMachineAuditDaoImpl();
         // Instantiate the Service Layer and wire the DAO and Audit DAO into it
         VendingMachineServiceLayer myService = new VendingMachineServiceLayerImpl(myDao, myAuditDao);
         // Instantiate the Controller and wire the Service Layer into it

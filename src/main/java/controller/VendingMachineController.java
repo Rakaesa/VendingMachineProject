@@ -5,10 +5,16 @@
  */
 package controller;
 
+import dao.VendingMachinePersistenceException;
+import dto.Change;
 import java.math.BigDecimal;
 import static java.math.RoundingMode.HALF_UP;
+import service.InsufficientFundsException;
+import service.NoItemInventoryException;
+import service.VendingMachineServiceLayer;
 import ui.UserIO;
 import ui.UserIOConsoleFileImpl;
+import ui.VendingMachineView;
 
 /**
  *
@@ -45,7 +51,7 @@ public class VendingMachineController {
 
             }
             exitMessage();
-        } catch (VendingMachinePersistenceException e) {
+        } catch (VendingMachinePersistenceException | InsufficientFundsException | NoItemInventoryException e) {
             view.displayErrorMessage(e.getMessage());
         }
     }
@@ -57,11 +63,11 @@ public class VendingMachineController {
         return view.displayItemsGetSelection();
     }
     
-    private void enterMoneyAndSelectItem() throws VendingMachinePersistenceException {
+    private void enterMoneyAndSelectItem() throws VendingMachinePersistenceException, InsufficientFundsException, NoItemInventoryException {
         // assumes that getMoneyEntered prompts user for amount of money
         BigDecimal credit = new BigDecimal(view.getMoneyEntered()).setScale(2, HALF_UP);
         // assumes that getItemChoice user for item choice
-        int itemChoice = view.getItemChoice();
+        String itemChoice = view.getItemChoice();
         boolean hasErrors = false;
         do {
             try {
@@ -71,7 +77,7 @@ public class VendingMachineController {
                 // assumes that displayPurchaseSuccess tells the user their change (if successful)
                 view.displayPurchaseSuccess(change);
                 hasErrors = false;
-            } catch (VendingMachinePersistenceException | InsufficientCreditException e) {
+            } catch (VendingMachinePersistenceException | InsufficientFundsException | NoItemInventoryException e) {
                 hasErrors = true;
                 view.displayErrorMessage(e.getMessage());
             }
