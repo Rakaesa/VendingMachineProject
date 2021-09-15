@@ -55,6 +55,7 @@ public class VendingMachineController {
             }
         } catch (VendingMachinePersistenceException | InsufficientFundsException | NoItemInventoryException e) {
             view.displayErrorMessage(e.getMessage());
+            keepGoing = false;
         }
     }
     /*
