@@ -91,7 +91,12 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
 
     @Override
     public List<Item> getAllItems() throws VendingMachinePersistenceException {
+        VendingMachinePersistenceException persistenceException = new VendingMachinePersistenceException("Persistence exception: No items");
+        if(items.values()!=null)
         return new ArrayList(items.values());
+        else
+            throw persistenceException;
+            
     }
 
     @Override
