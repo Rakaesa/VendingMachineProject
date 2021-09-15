@@ -13,12 +13,44 @@ import java.util.Map;
  * @author pbott
  */
 public class Change {
+    private Map<String, Integer> change;
+    private int totalChange;
+    private int numQuarters = 0;
+    private int numDimes = 0;
+    private int numNickels = 0;
+    private int numPennies = 0;
+
+    public Change(int totalChange) {
+        this.totalChange = totalChange;
+        change = getChange(totalChange);
+    }
+
+    public Map<String, Integer> getChange() {
+        return change;
+    }
+
+    public int getTotalChange() {
+        return totalChange;
+    }
+
+    public int getNumQuarters() {
+        return numQuarters;
+    }
+
+    public int getNumDimes() {
+        return numDimes;
+    }
+
+    public int getNumNickels() {
+        return numNickels;
+    }
+
+    public int getNumPennies() {
+        return numPennies;
+    }
     
-    public static Map<String, Integer> getChange(int changeDue){
-        int numQuarters = 0;
-        int numDimes = 0;
-        int numNickels = 0;
-        int numPennies = 0;
+    public Map<String, Integer> getChange(int changeDue){
+        
         int total = changeDue;
         Map<String, Integer> changeToReturn = new HashMap<>();
         while(changeDue > 25){
@@ -40,7 +72,7 @@ public class Change {
         changeToReturn.put("Nickels", numNickels);
         changeToReturn.put("Pennies", numPennies);
         changeToReturn.put("Total", changeDue);
-        
+
         return changeToReturn;
     }
 }
