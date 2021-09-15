@@ -96,16 +96,25 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
 
     @Override
     public Item getItem(String name) throws VendingMachinePersistenceException {
-        return items.get(name);
+        
+        VendingMachinePersistenceException pointer = new VendingMachinePersistenceException("Persistence Exception: Null entry");
+        if(items.get(name)!=null)
+            return items.get(name);
+        else
+            throw pointer;
     }
 
     @Override
     public void decreaseStock(Item item) throws VendingMachinePersistenceException, NoItemInventoryException {
         
+        NoItemInventoryException inventoryException = new NoItemInventoryException("No items exception");
+        
         if(item.getStock()!=0){
             item.adjustStock(-1);
             items.put(item.getName(), item);
-        }        
+        }
+        else
+            throw inventoryException;
     }
 
 }
