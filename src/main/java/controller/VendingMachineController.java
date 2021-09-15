@@ -75,21 +75,19 @@ public class VendingMachineController {
         // assumes that getItemChoice user for item choice
         List<Item> items = service.getAllItems();
         String itemChoice = view.getItemChoice(items);
-        boolean hasErrors = false;
-        do {
-            try {
-                // assumes purchaseItem throws InsufficientCreditException if the user doesn't have enough money
-                // assumes displayErrorMessage informs the user if they have insufficient funds
-                Change change = service.purchaseItem(itemChoice, credit);
-                // assumes that displayPurchaseSuccess tells the user their change (if successful)
-                view.displayPurchaseSuccess(change);
-                
-                hasErrors = false;
-            } catch (VendingMachinePersistenceException | InsufficientFundsException | NoItemInventoryException e) {
-                hasErrors = true;
-                view.displayErrorMessage(e.getMessage());
-            }
-        } while(hasErrors);
+        try {
+            // assumes purchaseItem throws InsufficientCreditException if the user doesn't have enough money
+            // assumes displayErrorMessage informs the user if they have insufficient funds
+            Change change = service.purchaseItem(itemChoice, credit);
+            // assumes that displayPurchaseSuccess tells the user their change (if successful)
+            view.displayPurchaseSuccess(change);
+
+
+        } catch (VendingMachinePersistenceException | InsufficientFundsException | NoItemInventoryException e) {
+
+            view.displayErrorMessage(e.getMessage());
+        }
+
    }
     
     private void unknownCommand() {

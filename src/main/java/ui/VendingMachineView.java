@@ -36,7 +36,7 @@ public class VendingMachineView {
         int j = 1;
         for (Item i : items) {
             BigDecimal price = new BigDecimal(i.getPrice()).setScale(2, HALF_UP);
-            io.print(j + ". " + i.getName() + ", $" + price);
+            io.print(j + ". " + i.getName() + ", $" + price + " # Remaining: " + i.getStock());
             j++;
         }
      }
