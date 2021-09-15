@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 /**
  *
@@ -28,8 +29,8 @@ public class VendingMachineAuditDaoImpl implements VendingMachineAuditDao{
                 throw new VendingMachinePersistenceException("Could not write audit information.", e);
             }
  
-            LocalDateTime timestamp = LocalDateTime.now();
-            out.println(timestamp.toString() + " : " + entry);
+            LocalDateTime timestamp = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
+            out.println(timestamp.toString() + " | " + entry);
             out.flush();
     }
 }

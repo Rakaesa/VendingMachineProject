@@ -12,8 +12,6 @@ import dto.Change;
 import dto.Item;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 /**
@@ -32,19 +30,19 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     
     @Override
     public List<Item> getAllItems() throws VendingMachinePersistenceException {
-        auditDao.writeAuditEntry(getTime() + " | Called getAllItems()");
+        auditDao.writeAuditEntry("Called getAllItems()");
         return dao.getAllItems();
     }
     
     @Override
     public Item getItem(String name) throws VendingMachinePersistenceException {
-        auditDao.writeAuditEntry(getTime() + " | Called getItem()");
+        auditDao.writeAuditEntry("Called getItem()");
         return dao.getItem(name);
     }
     
     @Override
     public Change purchaseItem(String code, BigDecimal money) throws VendingMachinePersistenceException, InsufficientFundsException, NoItemInventoryException {
-        auditDao.writeAuditEntry(getTime() + " | Called purchaseItem()");
+        auditDao.writeAuditEntry("Called purchaseItem()");
         Item item = dao.getItem(code);
         BigDecimal price = new BigDecimal(item.getPrice()).setScale(2, RoundingMode.FLOOR);
         if (money.compareTo(price) < 0) {
@@ -56,7 +54,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         
         dao.decreaseStock(item);
         
-        auditDao.writeAuditEntry(getTime() + " | " + item.getName() + " was purchased.");
+        auditDao.writeAuditEntry(item.getName() + " was purchased.");
         
         int totalPennies = new BigDecimal(100).multiply(money.subtract(price)).intValue();
         
@@ -66,19 +64,15 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     
     @Override
     public void writeMachine() throws VendingMachinePersistenceException {
-        auditDao.writeAuditEntry(getTime() + " | Attempt to write item data to file.");
+        auditDao.writeAuditEntry("Attempt to write item data to file.");
         dao.writeMachine();
-        auditDao.writeAuditEntry(getTime() + " | Item data was successfully written to file.");
+        auditDao.writeAuditEntry("Item data was successfully written to file.");
     }
     
     @Override
     public void loadMachine() throws VendingMachinePersistenceException {
-        auditDao.writeAuditEntry(getTime() + " | Attempt to load item data from file.");
+        auditDao.writeAuditEntry("Attempt to load item data from file.");
         dao.writeMachine();
-        auditDao.writeAuditEntry(getTime() + " | Item data was successfuly loaded from file.");
-    }
-    
-    private String getTime(){
-        return LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS).toString();
+        auditDao.writeAuditEntry("Item data was successfuly loaded from file.");
     }
 }
