@@ -27,6 +27,11 @@ public class App {
     public static void main(String[] args) throws VendingMachinePersistenceException {
         AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext();
             appContext.scan("com.mthree.vendingMachineProject");
+            appContext.scan("controller");
+            appContext.scan("dao");
+            appContext.scan("dto");
+            appContext.scan("service");
+            appContext.scan("ui");
             appContext.refresh();
         // Instantiate the UserIO implementation
         UserIO myIo = appContext.getBean("userIOConsoleFileImpl", UserIOConsoleFileImpl.class);
