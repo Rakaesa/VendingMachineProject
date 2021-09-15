@@ -46,19 +46,19 @@ public class VendingMachineView {
         String item = new String();
         switch (choice) {
             case 1:
-                item = "Snickers";
+                item = items.get(choice-1).getName();
                 break;
             case 2:
-                item = "Kit Kat";
+                item = items.get(choice-1).getName();
                 break;
             case 3:
-                item = "Mountain Dew";
+                item = items.get(choice-1).getName();
                 break;
             case 4:
-                item = "Coca Cola";
+                item = items.get(choice-1).getName();
                 break;
             case 5:
-                item = "Doritos";
+                item = items.get(choice-1).getName();
                 break;
         }
         return item;
