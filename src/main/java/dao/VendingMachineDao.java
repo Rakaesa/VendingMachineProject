@@ -20,5 +20,9 @@ public interface VendingMachineDao {
     Item getItem(String name) throws VendingMachinePersistenceException;
     
     void decreaseStock(Item item) throws VendingMachinePersistenceException, NoItemInventoryException;
+    
+    void  writeMachine() throws VendingMachinePersistenceException;
+    
+    void loadMachine() throws VendingMachinePersistenceException;
 
 }
