@@ -11,6 +11,7 @@ import dao.VendingMachineAuditDaoImpl;
 import dao.VendingMachineDao;
 import dao.VendingMachineDaoImpl;
 import dao.VendingMachinePersistenceException;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import service.VendingMachineServiceLayer;
 import service.VendingMachineServiceLayerImpl;
 import ui.UserIO;
@@ -24,18 +25,21 @@ import ui.VendingMachineView;
 public class App {
 
     public static void main(String[] args) throws VendingMachinePersistenceException {
+        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext();
+            appContext.scan("com.mthree.vendingMachineProject");
+            appContext.refresh();
         // Instantiate the UserIO implementation
-        UserIO myIo = new UserIOConsoleFileImpl();
+        UserIO myIo = appContext.getBean("userIOConsoleFileImpl", UserIOConsoleFileImpl.class);
         // Instantiate the View and wire the UserIO implementation into it
-        VendingMachineView myView = new VendingMachineView(myIo);
+        VendingMachineView myView = appContext.getBean("vendingMachineView", VendingMachineView.class);
         // Instantiate the DAO
-        VendingMachineDao myDao = new VendingMachineDaoImpl();
+        VendingMachineDao myDao = appContext.getBean("vendingMachineDaoImpl", VendingMachineDaoImpl.class);
         // Instantiate the Audit DAO
-        VendingMachineAuditDao myAuditDao = new VendingMachineAuditDaoImpl();
+        VendingMachineAuditDao myAuditDao = appContext.getBean("vendingMachineAuditDaoImpl", VendingMachineAuditDaoImpl.class);
         // Instantiate the Service Layer and wire the DAO and Audit DAO into it
-        VendingMachineServiceLayer myService = new VendingMachineServiceLayerImpl(myDao, myAuditDao);
+        VendingMachineServiceLayer myService = appContext.getBean("vendingMachineServiceLayerImpl", VendingMachineServiceLayerImpl.class);
         // Instantiate the Controller and wire the Service Layer into it
-        VendingMachineController controller = new VendingMachineController(myService, myView);
+        VendingMachineController controller = appContext.getBean("vendingMachineController", VendingMachineController.class);
         // Kick off the Controller
         controller.run();
     }  

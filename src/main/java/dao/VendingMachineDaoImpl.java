@@ -17,12 +17,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import org.springframework.stereotype.Component;
 import service.NoItemInventoryException;
 
 /**
  *
  * @author conno
  */
+
+@Component
 public class VendingMachineDaoImpl implements VendingMachineDao {
 
     public static final String DELIMITER = "::";

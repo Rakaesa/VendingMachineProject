@@ -11,6 +11,8 @@ import dto.Item;
 import java.math.BigDecimal;
 import static java.math.RoundingMode.HALF_UP;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import service.InsufficientFundsException;
 import service.NoItemInventoryException;
 import service.VendingMachineServiceLayer;
@@ -22,11 +24,14 @@ import ui.VendingMachineView;
  *
  * @author conno
  */
+@Component
 public class VendingMachineController {
     
     private VendingMachineView view;
     private UserIO io = new UserIOConsoleFileImpl();
     private VendingMachineServiceLayer service;
+    
+    @Autowired
     public VendingMachineController(VendingMachineServiceLayer service, VendingMachineView view) {
         this.service = service;
         this.view = view;

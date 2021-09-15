@@ -10,15 +10,19 @@ import dto.Item;
 import java.math.BigDecimal;
 import static java.math.RoundingMode.HALF_UP;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Sol
  */
+
+@Component
 public class VendingMachineView {
 
     private UserIO io;
-    
+    @Autowired
     public VendingMachineView(UserIO io) {
         this.io = io;
     }

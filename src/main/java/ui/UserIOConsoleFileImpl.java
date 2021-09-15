@@ -10,7 +10,9 @@ package ui;
  * @author Sol
  */
 import java.util.Scanner;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserIOConsoleFileImpl implements UserIO {
 
     final private Scanner console = new Scanner(System.in);
