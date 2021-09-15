@@ -43,6 +43,7 @@ public class VendingMachineController {
                 switch (menuSelection) {
                     case 1:
                         enterMoneyAndSelectItem();
+                        service.writeMachine();
                         break;
                     case 2:
                         exitMessage();
@@ -82,6 +83,7 @@ public class VendingMachineController {
                 Change change = service.purchaseItem(itemChoice, credit);
                 // assumes that displayPurchaseSuccess tells the user their change (if successful)
                 view.displayPurchaseSuccess(change);
+                
                 hasErrors = false;
             } catch (VendingMachinePersistenceException | InsufficientFundsException | NoItemInventoryException e) {
                 hasErrors = true;

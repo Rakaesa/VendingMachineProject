@@ -55,10 +55,10 @@ public class VendingMachineView {
                 item = "Mountain Dew";
                 break;
             case 4:
-                item = "Doritos";
+                item = "Coca Cola";
                 break;
             case 5:
-                item = "Coca Cola";
+                item = "Doritos";
                 break;
         }
         return item;
@@ -68,13 +68,11 @@ public class VendingMachineView {
         int numDimes = change.getNumDimes();
         int numNickels = change.getNumNickels();
         int numPennies = change.getNumPennies();
-        int total = change.getTotalChange();
         io.print("Your change is:");
         io.print("Quarters: " + numQuarters);
         io.print("Dimes: " + numDimes);
         io.print("Nickels: " + numNickels);
         io.print("Pennies: " + numPennies);
-        io.print("Total: " + total);
     }
     public void displayExitBanner() {
         io.print("Good Bye!!!");

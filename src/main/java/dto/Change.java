@@ -53,26 +53,25 @@ public class Change {
         
         int total = changeDue;
         Map<String, Integer> changeToReturn = new HashMap<>();
-        while(changeDue > 25){
-                numQuarters+=1;
+        while(total >= 25){
+                this.numQuarters+=1;
                 total -=25; 
         }
-        while(changeDue > 10){
-                numDimes+=1;
+        while(total >= 10){
+                this.numDimes+=1;
                 total -=10; 
         }
-        while(changeDue > 5){
-                numNickels+=1;
+        while(total >= 5){
+                this.numNickels+=1;
                 total -=5; 
         }
-        numPennies = total;
+        this.numPennies = total;
         
         changeToReturn.put("Quarters", numQuarters);
         changeToReturn.put("Dimes", numDimes);
         changeToReturn.put("Nickels", numNickels);
         changeToReturn.put("Pennies", numPennies);
         changeToReturn.put("Total", changeDue);
-
         return changeToReturn;
     }
 }

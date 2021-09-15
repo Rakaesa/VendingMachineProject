@@ -10,6 +10,7 @@ import dao.VendingMachineAuditDao;
 import dao.VendingMachineAuditDaoImpl;
 import dao.VendingMachineDao;
 import dao.VendingMachineDaoImpl;
+import dao.VendingMachinePersistenceException;
 import service.VendingMachineServiceLayer;
 import service.VendingMachineServiceLayerImpl;
 import ui.UserIO;
@@ -22,7 +23,7 @@ import ui.VendingMachineView;
  */
 public class App {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws VendingMachinePersistenceException {
         // Instantiate the UserIO implementation
         UserIO myIo = new UserIOConsoleFileImpl();
         // Instantiate the View and wire the UserIO implementation into it

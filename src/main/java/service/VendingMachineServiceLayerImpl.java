@@ -44,7 +44,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     public Change purchaseItem(String code, BigDecimal money) throws VendingMachinePersistenceException, InsufficientFundsException, NoItemInventoryException {
         auditDao.writeAuditEntry("Called purchaseItem()");
         Item item = dao.getItem(code);
-        BigDecimal price = new BigDecimal(item.getPrice()).setScale(2, RoundingMode.FLOOR);
+        BigDecimal price = new BigDecimal(item.getPrice()).setScale(2, RoundingMode.HALF_UP);
         if (money.compareTo(price) < 0) {
             throw new InsufficientFundsException("You didn't put in enough money!");
         }
@@ -57,7 +57,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         auditDao.writeAuditEntry(item.getName() + " was purchased.");
         
         int totalPennies = new BigDecimal(100).multiply(money.subtract(price)).intValue();
-        
+
         return new Change(totalPennies);
                 
     }
