@@ -45,7 +45,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
         return newItem;
     }
 
-    private void writeMachine() throws VendingMachinePersistenceException {
+    public void writeMachine() throws VendingMachinePersistenceException {
 
         PrintWriter out;
 
@@ -67,7 +67,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
         out.close();
     }
 
-    private void loadMachine() throws VendingMachinePersistenceException {
+    public void loadMachine() throws VendingMachinePersistenceException {
         Scanner scanner;
         try {
             scanner = new Scanner(
