@@ -72,7 +72,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     @Override
     public void loadMachine() throws VendingMachinePersistenceException {
         auditDao.writeAuditEntry("Attempt to load item data from file.");
-        dao.writeMachine();
+        dao.loadMachine();
         auditDao.writeAuditEntry("Item data was successfuly loaded from file.");
     }
 }

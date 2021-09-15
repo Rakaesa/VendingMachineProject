@@ -7,6 +7,8 @@ package ui;
 
 import dto.Change;
 import dto.Item;
+import java.math.BigDecimal;
+import static java.math.RoundingMode.HALF_UP;
 import java.util.List;
 
 /**
@@ -33,7 +35,8 @@ public class VendingMachineView {
     private void displayItems(List<Item> items) {
         int j = 1;
         for (Item i : items) {
-            io.print(j + ". " + i.getName() + ", $" + i.getPrice());
+            BigDecimal price = new BigDecimal(i.getPrice()).setScale(2, HALF_UP);
+            io.print(j + ". " + i.getName() + ", $" + price);
             j++;
         }
      }
