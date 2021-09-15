@@ -7,6 +7,7 @@ package service;
 
 import dao.VendingMachineAuditDao;
 import dao.VendingMachineDao;
+import dao.VendingMachinePersistenceException;
 import dto.Change;
 import dto.Item;
 import java.math.BigDecimal;
@@ -33,7 +34,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     }
     
     @Override
-    public Item getItem(String name) {
+    public Item getItem(String name){
         return dao.getItem(name);
     }
     

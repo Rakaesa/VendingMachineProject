@@ -5,6 +5,7 @@
  */
 package dao;
 
+import dto.Item;
 import java.util.List;
 
 /**

@@ -5,12 +5,16 @@
  */
 package dao;
 
+import dto.Change;
+import dto.Item;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,14 +35,14 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
         MACHINE_FILE = "vendingMachine.txt";
     }
 
-    private String marshallStudent(Item i) {
+    private String marshallItem(Item i) {
         return i.getName() + DELIMITER + i.getPrice() + DELIMITER + i.getStock();
     }
     
     public Item unMarshallItem(String itemInf){
 
         String[] itemVariables = itemInf.split(DELIMITER);
-        Item newItem = new Item(itemVariables[0], itemVariables[1], itemVariables[2]);
+        Item newItem = new Item(itemVariables[0], Double.parseDouble(itemVariables[1]), Integer.parseInt(itemVariables[2]));
         return newItem;
     }
 
@@ -91,17 +95,22 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
 
     @Override
     public List<Item> getAllItems() throws VendingMachinePersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ArrayList(items.values());
     }
 
     @Override
     public Item getItem(String name) throws VendingMachinePersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return items.get(name);
     }
 
     @Override
     public void decreaseStock(Item item) throws VendingMachinePersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(item.getStock()!=0){
+            item.adjustStock(-1);
+            items.put(item.getName(), item);
+        }
+        
     }
 
 }
