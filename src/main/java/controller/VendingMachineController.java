@@ -31,6 +31,7 @@ public class VendingMachineController {
     }
     public void run()  {
         boolean keepGoing = true;
+        
         int menuSelection = -1;
         try {
             while (keepGoing) {
@@ -50,7 +51,6 @@ public class VendingMachineController {
                 }
 
             }
-            exitMessage();
         } catch (VendingMachinePersistenceException | InsufficientFundsException | NoItemInventoryException e) {
             view.displayErrorMessage(e.getMessage());
         }
