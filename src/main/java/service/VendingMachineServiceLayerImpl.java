@@ -63,6 +63,18 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
                 
     }
     
+    public void writeMachine() throws VendingMachinePersistenceException {
+        auditDao.writeAuditEntry(getTime() + " | Attempt to write item data to file.");
+        dao.writeMachine();
+        auditDao.writeAuditEntry(getTime() + " | Item data was successfully written to file.");
+    }
+    
+    public void loadMachine() throws VendingMachinePersistenceException {
+        auditDao.writeAuditEntry(getTime() + " | Attempt to load item data from file.");
+        dao.writeMachine();
+        auditDao.writeAuditEntry(getTime() + " | Item data was successfuly loaded from file.");
+    }
+    
     private String getTime(){
         return LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS).toString();
     }
