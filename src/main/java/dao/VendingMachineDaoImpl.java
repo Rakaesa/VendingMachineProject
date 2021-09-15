@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import service.NoItemInventoryException;
 
 /**
  *
@@ -99,13 +100,12 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
     }
 
     @Override
-    public void decreaseStock(Item item) throws VendingMachinePersistenceException {
+    public void decreaseStock(Item item) throws VendingMachinePersistenceException, NoItemInventoryException {
         
         if(item.getStock()!=0){
             item.adjustStock(-1);
             items.put(item.getName(), item);
-        }
-        
+        }        
     }
 
 }

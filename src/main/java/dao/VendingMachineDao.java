@@ -7,6 +7,7 @@ package dao;
 
 import dto.Item;
 import java.util.List;
+import service.NoItemInventoryException;
 
 /**
  *
@@ -18,6 +19,6 @@ public interface VendingMachineDao {
     
     Item getItem(String name) throws VendingMachinePersistenceException;
     
-    void decreaseStock(Item item) throws VendingMachinePersistenceException;
+    void decreaseStock(Item item) throws VendingMachinePersistenceException, NoItemInventoryException;
 
 }
