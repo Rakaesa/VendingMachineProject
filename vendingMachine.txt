@@ -2,4 +2,4 @@ Snickers::2.00::5
 Kit Kat::2.00::10
 Mountain Dew::2.00:12
 Doritos::1.50::8
-Coca Cola::2.00:6
+Coca Cola::2.00::6
