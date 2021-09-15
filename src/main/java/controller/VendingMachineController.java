@@ -7,8 +7,10 @@ package controller;
 
 import dao.VendingMachinePersistenceException;
 import dto.Change;
+import dto.Item;
 import java.math.BigDecimal;
 import static java.math.RoundingMode.HALF_UP;
+import java.util.List;
 import service.InsufficientFundsException;
 import service.NoItemInventoryException;
 import service.VendingMachineServiceLayer;
@@ -59,15 +61,17 @@ public class VendingMachineController {
        Calls view to display the items and their respective prices.
        Returns 1 = enter money, 2 = exit
     */
-    private int displayItemsGetSelection() {
-        return view.displayItemsGetSelection();
+    private int displayItemsGetSelection() throws VendingMachinePersistenceException {
+        List<Item> items = service.getAllItems();
+        return view.displayItemsGetSelection(items);
     }
     
     private void enterMoneyAndSelectItem() throws VendingMachinePersistenceException, InsufficientFundsException, NoItemInventoryException {
         // assumes that getMoneyEntered prompts user for amount of money
         BigDecimal credit = new BigDecimal(view.getMoneyEntered()).setScale(2, HALF_UP);
         // assumes that getItemChoice user for item choice
-        String itemChoice = view.getItemChoice();
+        List<Item> items = service.getAllItems();
+        String itemChoice = view.getItemChoice(items);
         boolean hasErrors = false;
         do {
             try {

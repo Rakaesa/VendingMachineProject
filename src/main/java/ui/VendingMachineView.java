@@ -6,6 +6,8 @@
 package ui;
 
 import dto.Change;
+import dto.Item;
+import java.util.List;
 
 /**
  *
@@ -19,29 +21,24 @@ public class VendingMachineView {
         this.io = io;
     }
 
-    public int displayItemsGetSelection() {
+    public int displayItemsGetSelection(List<Item> items) {
         io.print("Vending Machine:");
-        io.print("1. Snickers, $2.00");
-        io.print("2. Kit Kat, $2.00");
-        io.print("3. Mountain Dew, $2.00");
-        io.print("4. Doritos, $1.50");
-        io.print("5. Coca Cola, $2.00");
-
+        displayItems(items);
         return io.readInt("Please select: 1 = Enter Money. 2. Exit", 1, 2);
     }
     public double getMoneyEntered() {
         double credit = io.readDouble("Please enter your money:");
         return credit;
     }
-    
-    public String getItemChoice() {
-        io.print("Vending Machine:");
-        io.print("1. Snickers, $2.00");
-        io.print("2. Kit Kat, $2.00");
-        io.print("3. Mountain Dew, $2.00");
-        io.print("4. Doritos, $1.50");
-        io.print("5. Coca Cola, $2.00");
-        
+    private void displayItems(List<Item> items) {
+        int j = 1;
+        for (Item i : items) {
+            io.print(j + ". " + i.getName() + ", $" + i.getPrice());
+            j++;
+        }
+     }
+    public String getItemChoice(List<Item> items) {
+        displayItems(items);
         int choice = io.readInt("Please select an item from 1-5", 1, 5);
         String item = new String();
         switch (choice) {
