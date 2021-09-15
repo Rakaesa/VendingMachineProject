@@ -36,6 +36,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         return dao.getAllItems();
     }
     
+    @Override
     public Item getItem(String name) throws VendingMachinePersistenceException {
         auditDao.writeAuditEntry(getTime() + " | Called getItem()");
         return dao.getItem(name);
@@ -63,12 +64,14 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
                 
     }
     
+    @Override
     public void writeMachine() throws VendingMachinePersistenceException {
         auditDao.writeAuditEntry(getTime() + " | Attempt to write item data to file.");
         dao.writeMachine();
         auditDao.writeAuditEntry(getTime() + " | Item data was successfully written to file.");
     }
     
+    @Override
     public void loadMachine() throws VendingMachinePersistenceException {
         auditDao.writeAuditEntry(getTime() + " | Attempt to load item data from file.");
         dao.writeMachine();
