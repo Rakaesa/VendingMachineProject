@@ -5,10 +5,12 @@
  */
 package service;
 
+import dao.VendingMachinePersistenceException;
 import dto.Change;
 import dto.Item;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -16,10 +18,10 @@ import java.util.List;
  */
 public interface VendingMachineServiceLayer {
     
-    List<Item> getAllItems();
+    List<Item> getAllItems() throws VendingMachinePersistenceException;
     
-    Item getItem(String name);
+    Item getItem(String name) throws VendingMachinePersistenceException;
     
-    Change purchaseItem(String code, BigDecimal money) throws InsufficientFundsException, NoItemInventoryException;
+    Change purchaseItem(String code, BigDecimal money) throws VendingMachinePersistenceException, InsufficientFundsException, NoItemInventoryException;
     
 }
