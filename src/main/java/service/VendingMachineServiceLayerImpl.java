@@ -46,7 +46,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         auditDao.writeAuditEntry(LocalDateTime.now().toString() + ": Called purchaseItem()");
         Item item = dao.getItem(code);
         BigDecimal price = new BigDecimal(item.getPrice()).setScale(2, RoundingMode.FLOOR);
-        if (price.compareTo(money) < 0) {
+        if (money.compareTo(price) < 0) {
             throw new InsufficientFundsException("You didn't put in enough money!");
         }
         if (item.getStock() <= 0) {
