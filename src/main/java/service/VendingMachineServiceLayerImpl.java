@@ -13,6 +13,7 @@ import dto.Item;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 
@@ -32,18 +33,18 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     
     @Override
     public List<Item> getAllItems() throws VendingMachinePersistenceException {
-        auditDao.writeAuditEntry(LocalDateTime.now().toString() + ": Called getAllItems()");
+        auditDao.writeAuditEntry(getTime() + " | Called getAllItems()");
         return dao.getAllItems();
     }
     
     public Item getItem(String name) throws VendingMachinePersistenceException {
-        auditDao.writeAuditEntry(LocalDateTime.now().toString() + ": Called getItem()");
+        auditDao.writeAuditEntry(getTime() + " | Called getItem()");
         return dao.getItem(name);
     }
     
     @Override
     public Change purchaseItem(String code, BigDecimal money) throws VendingMachinePersistenceException, InsufficientFundsException, NoItemInventoryException {
-        auditDao.writeAuditEntry(LocalDateTime.now().toString() + ": Called purchaseItem()");
+        auditDao.writeAuditEntry(getTime() + " | Called purchaseItem()");
         Item item = dao.getItem(code);
         BigDecimal price = new BigDecimal(item.getPrice()).setScale(2, RoundingMode.FLOOR);
         if (money.compareTo(price) < 0) {
@@ -55,11 +56,15 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         
         dao.decreaseStock(item);
         
-        auditDao.writeAuditEntry(LocalDateTime.now().toString() + ": " + item.getName() + " was purchased.");
+        auditDao.writeAuditEntry(getTime() + " | " + item.getName() + " was purchased.");
         
         int totalPennies = new BigDecimal(100).multiply(money.subtract(price)).intValue();
         
         return new Change(totalPennies);
                 
+    }
+    
+    private String getTime(){
+        return LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS).toString();
     }
 }
