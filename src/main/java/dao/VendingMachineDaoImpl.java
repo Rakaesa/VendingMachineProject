@@ -5,7 +5,6 @@
  */
 package dao;
 
-import dto.Change;
 import dto.Item;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -13,7 +12,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -85,11 +83,8 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
             currentLine = scanner.nextLine();
             currentItem = unMarshallItem(currentLine);
 
-            // We are going to use the student id as the map key for our student object.
-            // Put currentStudent into the map using student id as the key
             items.put(currentItem.getName(), currentItem);
         }
-        // close scanner
         scanner.close();
     }
 
