@@ -42,25 +42,10 @@ public class VendingMachineView {
      }
     public String getItemChoice(List<Item> items) {
         displayItems(items);
-        int choice = io.readInt("Please select an item from 1-5", 1, 5);
+        int numItems = items.size();
+        int choice = io.readInt("Please select an item from 1-" + numItems, 1, numItems);
         String item = new String();
-        switch (choice) {
-            case 1:
-                item = items.get(choice-1).getName();
-                break;
-            case 2:
-                item = items.get(choice-1).getName();
-                break;
-            case 3:
-                item = items.get(choice-1).getName();
-                break;
-            case 4:
-                item = items.get(choice-1).getName();
-                break;
-            case 5:
-                item = items.get(choice-1).getName();
-                break;
-        }
+        item = items.get(choice-1).getName();
         return item;
     }
     public void displayPurchaseSuccess(Change change) {
