@@ -31,9 +31,9 @@ public class VendingMachineController {
         this.service = service;
         this.view = view;
     }
-    public void run()  {
+    public void run() throws VendingMachinePersistenceException {
         boolean keepGoing = true;
-        
+        service.loadMachine();
         int menuSelection = -1;
         try {
             while (keepGoing) {
@@ -54,8 +54,9 @@ public class VendingMachineController {
 
             }
         } catch (VendingMachinePersistenceException | InsufficientFundsException | NoItemInventoryException e) {
-            view.displayErrorMessage(e.getMessage());
             keepGoing = false;
+            view.displayErrorMessage(e.getMessage());
+            
         }
     }
     /*

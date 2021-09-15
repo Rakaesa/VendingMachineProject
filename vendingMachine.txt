@@ -3,4 +3,3 @@ Kit Kat::2.00::10
 Mountain Dew::2.00::12
 Doritos::1.50::8
 Coca Cola::2.00::6
-
