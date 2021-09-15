@@ -10,7 +10,6 @@ package dto;
  * @author pbott
  */
 public interface Inventory {
-    int stock;
-    adjustStock(int i);
+    void adjustStock(int i);
     
 }

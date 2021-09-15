@@ -34,10 +34,6 @@ public class Item implements Inventory{
         return stock;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
     @Override
     public int hashCode() {
         int hash = 3;
@@ -69,6 +65,11 @@ public class Item implements Inventory{
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void adjustStock(int i) {
+        this.stock +=i;
     }
     
     
