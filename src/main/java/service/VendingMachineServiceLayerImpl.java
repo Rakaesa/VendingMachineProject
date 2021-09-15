@@ -5,6 +5,8 @@
  */
 package service;
 
+import dao.VendingMachineAuditDao;
+import dao.VendingMachineDao;
 import dto.Change;
 import dto.Item;
 import java.math.BigDecimal;
@@ -36,7 +38,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     }
     
     @Override
-    public Change purchaseItem(String code, BigDecimal money) {
+    public Change purchaseItem(String code, BigDecimal money) throws InsufficientFundsException, NoItemInventoryException {
         Item item = getItem(code);
         BigDecimal price = new BigDecimal(item.getPrice()).setScale(2, RoundingMode.FLOOR);
         if (price.compareTo(money) < 0)

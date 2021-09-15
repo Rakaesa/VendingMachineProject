@@ -20,6 +20,6 @@ public interface VendingMachineServiceLayer {
     
     Item getItem(String name);
     
-    Change purchaseItem(String code, BigDecimal money);
+    Change purchaseItem(String code, BigDecimal money) throws InsufficientFundsException, NoItemInventoryException;
     
 }
