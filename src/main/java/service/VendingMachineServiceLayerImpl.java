@@ -25,7 +25,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     
     private VendingMachineDao dao;
     private VendingMachineAuditDao auditDao;
-    
+
     @Autowired
     public VendingMachineServiceLayerImpl(VendingMachineDao dao, VendingMachineAuditDao auditDao) {
         this.dao = dao;
