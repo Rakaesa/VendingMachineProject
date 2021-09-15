@@ -1,5 +1,7 @@
-Snickers::2.0::4
+Snickers::2.0::2
 Kit Kat::2.0::10
 Coca Cola::2.0::5
+Skittles::5.0::5
+Snack::10.0::3
 Mountain Dew::2.0::11
 Doritos::1.5::0
