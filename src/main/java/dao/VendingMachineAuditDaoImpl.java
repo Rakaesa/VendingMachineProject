@@ -10,11 +10,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author conno
  */
+@Component
 public class VendingMachineAuditDaoImpl implements VendingMachineAuditDao{
     
     public static final String AUDIT_FILE = "audit.txt";
